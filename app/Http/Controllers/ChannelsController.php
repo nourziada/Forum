@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Channel;
 use Illuminate\Http\Request;
+use Session;
 
 class ChannelsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        $channels = Channel::all();
+
+        return view('channels.index', compact('channels'));
     }
 
     /**
@@ -34,7 +39,21 @@ class ChannelsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request,[
+            'name' => 'required',
+        ],[
+            'name.required' => 'حقل اسم القسم مطلوب',
+        ]);
+
+        $cahnnel = new Channel;
+
+        $cahnnel->title = $request->name;
+        $cahnnel->save();
+
+        Session::flash('success','تم إضافة القسم بنجاح');
+
+        return redirect()->back();
     }
 
     /**
@@ -56,7 +75,9 @@ class ChannelsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $channel = Channel::find($id);
+
+        return view('channels.edit' , compact('channel'));
     }
 
     /**
@@ -68,7 +89,22 @@ class ChannelsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request,[
+            'name' => 'required',
+        ],[
+            'name.required' => 'حقل اسم القسم مطلوب',
+        ]);
+
+        $channel = Channel::find($id);
+
+        $channel->title = $request->name;
+        $channel->save();
+
+        Session::flash('success','تم تعديل القسم بنجاح');
+
+        return redirect()->route('channel.index');
+
     }
 
     /**
@@ -79,6 +115,10 @@ class ChannelsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Channel::find($id)->delete();
+        Session::flash('success','تم حذف القسم بنجاح');
+
+        return redirect()->route('channel.index');
+
     }
 }

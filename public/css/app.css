@@ -16,3 +16,32 @@
 .navbar-default .navbar-nav>li>a, .navbar-default .navbar-text {
 	color : #fff;
 }
+
+@font-face {
+	font-family: myFirstFont;
+	src: url('../fonts/Swissra-Condensed-Bold.otf');
+}
+
+@font-face {
+	font-family: mySecondFont;
+	src: url('../fonts/Droid.Arabic.Kufi_DownloadSoftware.iR_.ttf');
+}
+
+
+
+
+body {
+	font-family: myFirstFont;
+}
+
+p {
+	font-family: mySecondFont;
+}
+
+.table th {
+	text-align: right;
+}
+
+.list-group {
+	padding-right: 0;
+}

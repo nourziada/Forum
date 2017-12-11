@@ -21,5 +21,16 @@ class UsersTableSeeder extends Seeder
         		'password' => bcrypt('password'),
         		'admin' => 1
         	]);
+
+        App\User::create(
+            [
+
+                'name' => 'nour ziada',
+                'email' => 'eng.nour.ziada@gmail.com',
+                'avatar' => asset('avatars/original.png'),
+                'password' => bcrypt('password'),
+                'admin' => 0
+            ]);
+
     }
 }

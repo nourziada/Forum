@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Channel;
 use App\User;
 use App\Reply;
+use Carbon\Carbon;
 
 class Discussion extends Model
 {
@@ -14,6 +15,7 @@ class Discussion extends Model
     	'content',
     	'user_id',
     	'channel_id',
+        'slug',
     ];
 
 
@@ -27,5 +29,12 @@ class Discussion extends Model
 
     public function replies(){
         return $this->hasMany('App\Reply');
+    }
+
+
+    public static function getCreatedAtAttribute($value)
+    {
+        Carbon::setLocale('ar');
+        return Carbon::parse($value, 'Asia/Gaza')->diffForHumans();
     }
 }

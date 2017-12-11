@@ -47,8 +47,8 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li><a href="{{route('home')}}">Home</a></li>  
-                            <li><a href="#services">Contact</a></li>
+
+
 
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -60,7 +60,7 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                                        تسجيل الخروج
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -69,6 +69,10 @@
                                     </li>
                                 </ul>
                             </li>
+
+                                <li><a href="#services">الاتصال</a></li>
+
+                                <li><a href="{{route('discuss.index')}}">الرئيسية</a></li>
                         @endguest
 
 
@@ -77,7 +81,42 @@
             </div>
         </nav>
 
-        @yield('content')
+
+        <div class="container" dir="rtl">
+
+            @if(Request::is('forum/admin/channel'))
+
+            @else
+
+            <div class="col-md-4">
+            
+                <a href="{{route('discuss.create')}}" class="form-control btn btn-primary" style="margin-bottom: 10px">إنشاء نقاش جديد</a>
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+                            الأقسام
+                        </div>
+
+                        <div class="panel-body">
+                            <ul class="list-group">
+
+                                @foreach($channels as $channel)
+
+                                    <li class="list-group-item"> {{ $channel->title }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+
+            </div>
+            @endif
+
+                @yield('content')
+
+        </div>
+
+
     </div>
 
     <!-- Scripts -->

@@ -38,7 +38,7 @@ class SocialsController extends Controller
     	});
 
 
-    	return redirect()->route('home');
+    	return redirect()->route('discuss.index');
 	    
     }
 }

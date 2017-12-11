@@ -43,7 +43,7 @@
                                     <a href="
                                     @auth
 
-                                        {{route('home')}}
+                                        {{route('discuss.index')}}
                                     @else
                                         {{route('index')}}
 
